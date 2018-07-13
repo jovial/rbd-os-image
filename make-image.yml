@@ -2,13 +2,13 @@
 - name: Generate guest image and upload
   hosts: localhost
   vars:
-    source_checkout_path: /home/hpcszum2/git
+    source_checkout_path: "{{ lookup('env','HOME') }}/.dib_git"
   roles:
     - role: stackhpc.os-images
       os_images_force_rebuild: True
       os_images_upload: True
       os_images_overwrite_policy: overwrite
-      os_images_venv: /home/hpcszum2/venvs/os2
+      os_images_venv: "{{ lookup('env','VIRTUAL_ENV') }}"
       os_images_auth:
         auth_url:     "{{ lookup('env','OS_AUTH_URL') }}"
         username:     "{{ lookup('env','OS_USERNAME') }}"
