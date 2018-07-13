@@ -1,0 +1,4 @@
+---
+- src: stackhpc.os-images
+- src: stackhpc.os-openstackclient
+  src: stackhpc.os-shade

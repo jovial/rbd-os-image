@@ -1,0 +1,31 @@
+---
+- name: Generate guest image and upload
+  hosts: localhost
+  vars:
+    source_checkout_path: /home/hpcszum2/git
+  roles:
+    - role: stackhpc.os-images
+      os_images_force_rebuild: True
+      os_images_upload: True
+      os_images_overwrite_policy: overwrite
+      os_images_venv: /home/hpcszum2/venvs/os2
+      os_images_auth:
+        auth_url:     "{{ lookup('env','OS_AUTH_URL') }}"
+        username:     "{{ lookup('env','OS_USERNAME') }}"
+        password:     "{{ lookup('env','OS_PASSWORD') }}"
+        project_name: "{{ lookup('env','OS_TENANT_NAME') }}"
+      os_images_git_elements:
+        - repo: "https://github.com/stackhpc/stackhpc-image-elements"
+          version: "dracut-rbd"
+          local: "{{ source_checkout_path }}/stackhpc-image-elements"
+          elements_path: "elements"
+      os_images_list:
+      - name: wjs
+        elements:
+          - centos7
+          - epel
+          - selinux-permissive
+          - dhcp-all-interfaces
+          - baremetal
+          #- vm
+          - dracut-ceph
