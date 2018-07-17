@@ -1,4 +1,11 @@
 ---
-- src: stackhpc.os-images
-- src: stackhpc.os-openstackclient
-  src: stackhpc.os-shade
+- src: git+https://github.com/stackhpc/ansible-role-os-openstackclient.git
+  version: feature/ubuntu
+  name: stackhpc.os-openstackclient
+- src: git+https://github.com/stackhpc/ansible-role-os-shade.git
+  version: feature/ubuntu
+  name: stackhpc.os-shade
+- src: git+https://github.com/stackhpc/ansible-role-os-images.git
+  version: feature/ubuntu
+  name: stackhpc.os-images
+
